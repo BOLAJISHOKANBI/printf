@@ -11,7 +11,6 @@
  * @size: Size specifier
  * Return: Number of chars printed.
  */
-
 int print_pointer(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
@@ -38,14 +37,14 @@ int print_pointer(va_list types, char buffer[],
 		num_addrs /= 16;
 		length++;
 	}
+
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
 		padd = '0';
-
 	if (flags & F_PLUS)
 		extra_c = '+', length++;
-
 	else if (flags & F_SPACE)
 		extra_c = ' ', length++;
+
 	ind++;
 
 	/*return (write(1, &buffer[i], BUFF_SIZE - i - 1));*/
@@ -64,7 +63,6 @@ int print_pointer(va_list types, char buffer[],
  * @size: Size specifier
  * Return: Number of chars printed
  */
-
 int print_non_printable(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
@@ -85,8 +83,10 @@ int print_non_printable(va_list types, char buffer[],
 			buffer[i + offset] = str[i];
 		else
 			offset += append_hexa_code(str[i], buffer, i + offset);
+
 		i++;
 	}
+
 	buffer[i + offset] = '\0';
 
 	return (write(1, buffer, i + offset));
@@ -120,20 +120,21 @@ int print_reverse(va_list types, char buffer[],
 	if (str == NULL)
 	{
 		UNUSED(precision);
+
 		str = ")Null(";
 	}
 	for (i = 0; str[i]; i++)
 		;
+
 	for (i = i - 1; i >= 0; i--)
 	{
 		char z = str[i];
+
 		write(1, &z, 1);
 		count++;
 	}
-
 	return (count);
 }
-
 /************************* PRINT A STRING IN ROT13 *************************/
 /**
  * print_rot13string - Print a string in rot13.
@@ -145,7 +146,6 @@ int print_reverse(va_list types, char buffer[],
  * @size: Size specifier
  * Return: Numbers of chars printed
  */
-
 int print_rot13string(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
@@ -165,7 +165,6 @@ int print_rot13string(va_list types, char buffer[],
 
 	if (str == NULL)
 		str = "(AHYY)";
-
 	for (i = 0; str[i]; i++)
 	{
 		for (j = 0; in[j]; j++)
@@ -185,6 +184,5 @@ int print_rot13string(va_list types, char buffer[],
 			count++;
 		}
 	}
-
 	return (count);
 }
